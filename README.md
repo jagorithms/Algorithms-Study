@@ -36,7 +36,7 @@ git checkout [branch_name]
 cd [problem]
 ```
 
-4. Make your own file <name>.java
+4. Make your own file [your_name].java
 5. Have fun coding!
 6. Commit and push to remote branch
 ```bash
