@@ -36,4 +36,11 @@ git checkout [branch_name]
 cd [problem]
 ```
 
-4. Have fun coding!
+4. Make your own file <name>.java
+5. Have fun coding!
+6. Commit and push to remote branch
+```bash
+git add .
+git commit -m "Refer to commit conventions for more information"
+git push origin [branch_name]
+```
