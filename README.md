@@ -2,6 +2,14 @@
 
 We solve coding problems with a focus on a particular topic each week. 
 
+## Commit Conventions
+
+```
+- feat: <name> #<problem number>
+- refactor: <name> #<problem number> <reason for refactoring the code, i.e., for better time complexity>
+- fix: <name> #<problem number>
+```
+
 ## Branching Strategy
 
 - main: includes all problems solved in this group. Each branch is merged to this branch after the weekly meet-up session.
