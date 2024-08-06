@@ -30,7 +30,7 @@ public class 김서로 {
 		// 컴퓨터 이용한 사람 수 
 		int[] computerCount = new int[N];
 		// 컴퓨터 종료 시각을 기준으로 최소 힙 생성 
-		PriorityQueue<int[]> useComputer = new PriorityQueue<>(Comparator.comparing(times -> times[1]));
+		PriorityQueue<int[]> minHeap = new PriorityQueue<>(Comparator.comparing(times -> times[1]));
 		// 사용 가능한 컴퓨터 
 		PriorityQueue<Integer> availableComputer = new PriorityQueue<>(); 
 		
@@ -40,8 +40,8 @@ public class 김서로 {
 			int end = times[1];
 			
 			// 사용 가능한 컴퓨터 갱신 
-			while (!useComputer.isEmpty() && useComputer.peek()[1] <= start) {
-				int index = useComputer.poll()[2];
+			while (!minHeap.isEmpty() && minHeap.peek()[1] <= start) {
+				int index = minHeap.poll()[2];
 				// 번호가 가장 작은 자리에 앉도록 최소 힙에 삽입 
 				availableComputer.add(index);
 			}
@@ -50,12 +50,12 @@ public class 김서로 {
 			if (!availableComputer.isEmpty()) {
 				int index = availableComputer.poll();
 				computerCount[index]++;
-				useComputer.add(new int[] {start, end, index});
+				minHeap.add(new int[] {start, end, index});
 			
 			// 사용 가능한 컴퓨터가 없다면 
 			} else {
 				computerCount[count]++;
-				useComputer.add(new int[] {start, end, count});
+				minHeap.add(new int[] {start, end, count});
 				count++;
 			}
 		}
