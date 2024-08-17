@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.LinkedList;
 
+// 메모리: 98960 KB, 시간: 504 ms
+
 public class 소문난칠공주 {
 	private static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
