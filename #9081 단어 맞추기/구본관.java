@@ -1,4 +1,4 @@
-//14184KB, 92ms
+//메모리: 14184 KB, 시간: 92 ms
 import java.io.*;
 import java.util.*;
 
