@@ -31,14 +31,19 @@ git clone https://github.com/jagorithms/Algorithms-Study.git
 git checkout [branch_name]
 ```
 
-3. Move to the specific problem's directory. 
+3. Pull any changes made in remote repository
+```bash
+git pull origin [branch_name]
+```
+
+4. Move to the specific problem's directory. 
 ```bash
 cd [problem]
 ```
 
-4. Make your own file [your_name].java
-5. Have fun coding!
-6. Commit and push to remote branch
+5. Make your own file [your_name].java
+6. Have fun coding!
+7. Commit and push to remote branch
 ```bash
 git add .
 git commit -m "Refer to commit conventions for more information"
