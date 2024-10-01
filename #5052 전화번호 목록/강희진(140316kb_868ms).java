@@ -7,6 +7,7 @@ public class Main {
         int value;
         Node parent;
         List<Node> children;
+        boolean isLeaf = false;
 
         Node(int value) {
             this.value = value;
@@ -60,16 +61,15 @@ public class Main {
         for (int i = 0; i < number.length(); i++) {
             int n = number.charAt(i) - '0';
 
-
-            if (current.hasChildOf(-10)) {
+            if (current.isLeaf) {
                 return false;
             } else if (current.getChildOf(n) == null) {
                 Node newNode = new Node(n, current);
                 current.children.add(newNode);
-            } 
+            }
             current = current.getChildOf(n);
         }
-        current.children.add(new Node(-10));
+        current.isLeaf = true;
         return true;
     }
 
