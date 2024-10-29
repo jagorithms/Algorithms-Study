@@ -13,7 +13,6 @@ public class Main {
     static int[] distance;
 
     public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         N = Integer.parseInt(br.readLine());
         graph = new boolean[N + 1][N + 1];
         visit = new boolean[N + 1];
