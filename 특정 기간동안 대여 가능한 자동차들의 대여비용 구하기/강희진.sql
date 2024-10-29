@@ -1,15 +1,31 @@
-SELECT cr.car_id, cr.car_type, round(30 * daily_fee * (1-0.01*discount_rate)) as fee
-from CAR_RENTAL_COMPANY_CAR cr 
-join CAR_RENTAL_COMPANY_RENTAL_HISTORY crh on cr.car_id = crh.car_id
-join CAR_RENTAL_COMPANY_DISCOUNT_PLAN cdp on cdp.car_type = cr.car_type
-where cr.car_type in ('세단', 'SUV') 
- and (
-     cr.car_id not in (
-        select car_id from CAR_RENTAL_COMPANY_RENTAL_HISTORY
-         where start_date <= '2022-11-30' or end_date >= '2022-11-01'
-    ) and duration_type like '30%'
+WITH AVAILABLE_CARS AS (
+    SELECT C.CAR_ID, C.CAR_TYPE, C.DAILY_FEE
+    FROM CAR_RENTAL_COMPANY_CAR C
+    WHERE C.CAR_TYPE IN ('세단', 'SUV')
+    AND C.CAR_ID NOT IN (
+        SELECT R.CAR_ID
+        FROM CAR_RENTAL_COMPANY_RENTAL_HISTORY R
+        WHERE R.END_DATE >= '2022-11-01'
+        AND R.START_DATE <= '2022-11-30'
+    )
+),
+DISCOUNTED_FEES AS (
+    SELECT 
+        AC.CAR_ID,
+        AC.CAR_TYPE,
+        FLOOR(AC.DAILY_FEE * 30 * (1 - COALESCE(DP.DISCOUNT_RATE, 0) / 100)) AS FEE
+    FROM AVAILABLE_CARS AC
+    LEFT JOIN CAR_RENTAL_COMPANY_DISCOUNT_PLAN DP 
+    ON AC.CAR_TYPE = DP.CAR_TYPE
+    AND DP.DURATION_TYPE = '30일 이상'
 )
-group by car_id
-having  30 * daily_fee * (1-0.01*discount_rate) >= 500000 
- and 30 * daily_fee * (1-0.01*discount_rate) <= 2000000
-order by fee desc, cr.car_type asc, cr.car_id desc;
+SELECT 
+    CAR_ID,
+    CAR_TYPE,
+    FEE
+FROM DISCOUNTED_FEES
+WHERE FEE BETWEEN 500000 AND 2000000
+ORDER BY 
+    FEE DESC,
+    CAR_TYPE ASC,
+    CAR_ID DESC;
