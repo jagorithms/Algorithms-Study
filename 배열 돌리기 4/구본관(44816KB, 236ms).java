@@ -2,6 +2,9 @@ import java.io.*;
 import java.util.*;
 
 public class Main {
+    static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    static StringTokenizer st;
+
     static int N, M, K;
     static int[][] graph;
     static int[][] rotations;
@@ -9,9 +12,7 @@ public class Main {
     static int result = Integer.MAX_VALUE;
 
     public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st = new StringTokenizer(br.readLine());
-        
+        st = new StringTokenizer(br.readLine());
         N = Integer.parseInt(st.nextToken());
         M = Integer.parseInt(st.nextToken());
         K = Integer.parseInt(st.nextToken());
@@ -67,11 +68,11 @@ public class Main {
             if (!visit[i]) {
                 visit[i] = true;
                 int[][] ngraph = copyGraph(tgraph);
-                
+
                 for (int j = 1; j <= rotations[i][2]; j++) {
                     rotate(rotations[i][0], rotations[i][1], j, ngraph);
                 }
-                
+
                 dfs(ngraph);
                 visit[i] = false;
                 allVisited = false;
@@ -99,4 +100,3 @@ public class Main {
         return copy;
     }
 }
-
